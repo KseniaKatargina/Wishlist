@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/showPassword.js" defer></script>
+    <script src="../static/js/menu.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+
+<form method="POST" th:action="@{/editProfile}" th:object="${userForm}">
+    <div class="mainProfile">
+        <div  class="profile">
+    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+
+        <label for="username">Изменить имя:</label>
+        <input type="text" id="username" name="username" th:value="${userForm.username}" maxlength="30" minlength="3"/>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Invalid username</span>
+            <br>
+            <br>
+    <div>
+        <label for="email">Изменить email:</label>
+        <input type="email" id="email" name="email" th:value="${userForm.email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid email</span>
+    </div>
+    <br>
+    <div>
+        <label for="birthday">Изменить дату рождения:</label>
+        <input type="date" id="birthday" name="birthday" th:value="${userForm.birthday != null ? userForm.birthday : ''}" />
+    </div>
+    <br>
+    <div>
+        <label for="oldPassword">Введите старый пароль:</label>
+        <input class="password_input" type="password" id="oldPassword" name="oldPassword" />
+        <a href="#" class="showPass" style="color: #1c1b1b">
+            <i id="i" class="far fa-eye"></i>
+        </a>
+        <span th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}">Incorrect old password</span>
+    </div>
+    <br>
+    <div>
+        <label for="newPassword">Введите новый пароль:</label>
+        <input class="new_password_input" type="password" id="newPassword" name="newPassword" />
+        <a href="#" class="showNewPass" style="color: #1c1b1b">
+            <i id="i3" class="far fa-eye"></i>
+        </a>
+        <span th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}">Password must be at least 8 characters long</span>
+    </div><br>
+    <div>
+        <label for="rePassword">Введите пароль еще раз:</label>
+        <input type="password" id="rePassword" name="rePassword" />
+        <a href="#" class="showRePass" style="color: #1c1b1b">
+            <i id="i2" class="far fa-eye"></i>
+        </a>
+        <span th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}">Passwords do not match</span>
+    </div>
+
+            <br>
+            <br>
+            <div class="edit">
+                <input value="Изменить" type="submit" name="изменить">
+            </div>
+            <div class="exit" style="text-align: left">
+                <a th:href="@{/profile}"><i class="fa fa-reply fa-1x"></i> Назад</a>
+            </div>
+        </div>
+    </div>
+</form>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

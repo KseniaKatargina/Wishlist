@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Subscriptions</title>
+  <link rel="stylesheet" th:href="@{/static/css/index.css}">
+  <script src="../static/js/menu.js" defer></script>
+  <script src="../static/js/subscriptions.js" defer></script>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="mainSubs">
+  <div class="subs">
+  <div>Категории, на которые вы подписаны: </div>
+    <div class="cat">
+      <table id="catTable">
+        <tbody th:each="category : ${subscribedCategories}">
+        <tr>
+          <td th:text="${category.name}">
+          </td>
+          <td><button class="unsubscribeButton" th:attr="data-category-id=${category.id}">Отписаться</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  <div>Продукты, которые вы не видели: </div>
+    <div class="seen">
+      <div th:each="product : ${unseenProducts}" class="productCard">
+        <img class="imgCard" th:src="*{product.getImg}" />
+        <p class="imgText" th:text="*{product.getText}" />
+        <button class="seenButton" th:attr="data-product-id=${product.id}">Отметить просмотренным</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

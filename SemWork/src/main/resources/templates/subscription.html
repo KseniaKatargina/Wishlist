@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Subscription</title>
+  <link rel="stylesheet" th:href="@{/static/css/index.css}">
+  <script src="../static/js/menu.js" defer></script>
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="mainProfile">
+  <h1>Подписаться на категории</h1>
+  <form th:action="@{/subscribe}" th:method="post">
+    <div th:each="category : ${categories}">
+      <label>
+        <input type="checkbox" th:name="categoryIds" th:value="${category.getId()}">
+        <span th:text="${category.getName()}"></span>
+      </label>
+      <br>
+    </div>
+    <br>
+    <input type="submit" value="Subscribe">
+    <br>
+    <br>
+    <br>
+    <div class="exit" style="text-align: left">
+      <a th:href="@{/profile}"><i class="fa fa-reply fa-1x"></i> Назад</a>
+    </div>
+  </form>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/menu.js" defer></script>
+    <script src="../static/js/product.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="main">
+    <p th:text="${title}"></p>
+    <p th:text="${description}"></p>
+    <div class="productCards">
+        <div th:each="productDto : ${products}" class="productCard">
+            <img class="imgCard" th:src="${productDto.getImg()}">
+            <p class="imgText" th:text="${productDto.text}"></p>
+            <div id="removeProductForm">
+                <input type="hidden" id="prodID" name="prodID" th:value="${productDto.id}">
+                <input type="hidden" id="listID" name="listID" th:value="${listID}">
+                <input class="removeProductButton" type="submit" id="removeProductButton" value="Удалить из листа">
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <form method="post" th:action="@{/removeWishlist}">
+        <input type="hidden" name="listID" th:value="${listID}">
+        <input type="submit" value="Удалить весь лист">
+    </form>
+    <br>
+    <form action="#" method="get" th:action="@{/changeWishlist}">
+        <input type="hidden" name="listID" th:value="${listID}">
+        <input type="submit" value="Редактировать">
+    </form>
+    <br>
+    <a href="#" th:href="@{/myWishlists}" class="remove"><i class="fa fa-reply fa-1x"></i> К моим листам</a>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

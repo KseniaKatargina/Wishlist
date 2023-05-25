@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Wishlists</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/menu.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="mainLists">
+    <div class="list">
+        <div class="add">
+            <a class="addList" th:href="@{/addWishlist}">
+                <i class="fas fa-plus fa-3x"></i>
+            </a>
+        </div>
+    </div>
+    <div th:each="wishlistDto : ${wishlists}">
+        <div class="list">
+        <div class="open">
+            <form th:action="@{/wishlist}" method="get">
+                <input type="hidden" name="listID" th:value="${wishlistDto.id}">
+                <input type="submit" name="title" th:value="${wishlistDto.title}">
+            </form>
+        </div>
+    </div>
+    </div>
+    <a th:href="@{/mainPage}" class="remove"><i class="fa fa-reply fa-1x"></i> На главную</a>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

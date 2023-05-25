@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/menu.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="mainProfile">
+    <div class="profile">
+        <p class="p1">Username: <span th:text="${userDto.username}"> </span></p>
+        <p class="p1">Возраст: <span th:text="${userDto.years}"> лет</span></p>
+        <p class="p1">Email: <span th:text="${userDto.email}"></span></p>
+        <br>
+        <br>
+        <form th:action="@{/editProfile}" method="get">
+            <input type="submit" value="Изменить профиль">
+        </form>
+        <br>
+        <br>
+        <form th:action="@{/subscribe}" th:method="get">
+            <input type="submit" value="Подписаться на категории">
+        </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="exit">
+            <a href="#" th:href="@{/mainPage}"><i class="fa fa-home fa-1x"> На главную</i> </a>
+        </div>
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Редактировать продукт</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script src="../static/js/menu.js" defer></script>
+    <script src="../static/js/editProduct.js" defer></script>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="adminMain">
+<h1 id="id" th:text="'Редактировать продукт'"></h1>
+<div id="productContainer">
+    <div th:object="${product}">
+        <form class="addForm" th:action="@{'/adminPage/editProduct/' + ${id}}" th:method="POST">
+            <br>
+            <input type="text" th:field="*{text}" placeholder="Текст" required><br>
+            <br>
+            <br>
+                <input type="hidden" th:value="${id}">
+                <div class="image-container" onclick="toggleEditImage(this)">
+                    <img class="image" th:src="${product.img}" alt="Изображение">
+                    <input type="url" id="img-input" th:field="*{img}" th:value="${product.img}" required>
+            </div>
+            <h3>Категории</h3>
+            <ul>
+                <li th:each="category : ${categories}">
+                    <p th:value="${category}" th:text="${category}" disabled>
+                    <button type="button" id="removeButton" onclick="removeCategory(this)" >Remove</button>
+                </li>
+            </ul>
+            <input type="hidden" th:each="category : ${categories}" th:name="'categoriesNames'" th:value="${category}">
+            <input type="submit" value="Сохранить">
+            <br>
+            <div class="exit" style="text-align: left">
+                <a th:href="@{/products}"><i class="fa fa-reply fa-1x"></i> Назад</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

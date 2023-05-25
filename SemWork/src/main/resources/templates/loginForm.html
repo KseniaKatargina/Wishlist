@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/showPassword.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<br>
+<br>
+<br>
+<div class="form">
+    <div class="loginForm">
+        <form th:action="@{/login}" method="post">
+            <br>
+            <br>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="email" required>
+            </div>
+            <br>
+            <br>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input class="password_input" type="password" id="password" name="password" placeholder="пароль" >
+                <a href="#" class="showPass" style="color: #1c1b1b">
+                    <i id="i" class="far fa-eye"></i>
+                </a>
+            </div>
+            <br>
+            <br>
+            <div class="form-group">
+                <button type="submit" value="Log in" class="btn-primary reg">Sign In</button>
+            </div>
+            <br>
+            <div th:if="${error}" class="error-message">
+                <span th:text="${error}"></span>
+            </div>
+        </form>
+        <p>Не зарегистрированы? <a class="links" th:href="@{/register}"> зарегистрироваться</a></p>
+        <br>
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

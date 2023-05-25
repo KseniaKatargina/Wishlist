@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>h</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <script defer src="../static/js/deleteAccount.js"></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:fragment="head">
+    <nav class="navbar">
+        <div class="icons">
+            <a th:href="@{/mainPage}" class="logo">
+                <i class="far fa-heart fa-3x" ></i>
+            </a>
+            <div class="dropdown">
+                <button class="dropButton">
+                    <i class="far fa-user-circle fa-3x" ></i>
+                </button>
+                <div class="dropdown-content" id="dropList">
+                    <a th:href="@{/mainPage}"><i class="fas fa-house-user fa-1x"></i>  Main</a>
+                    <a th:href="@{/profile}"><i class="far fa-user fa-1x"></i>  Profile</a>
+                    <a th:href="@{/myWishlists}"><i class="far fa-heart fa-1x"></i>  My wishlists</a>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/adminPage}"><i class="far fa-heart fa-1x"></i>Products</a>
+                    </div>
+                    <a th:href="@{/subscriptions}"><i class="far fa-heart fa-1x"></i>Subscriptions</a>
+                    <a href="#" class="delete"><i class="fas fa-sign-out-alt fa-1x"></i>  Exit</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Wishlist</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/menu.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="form">
+    <div class="createForm">
+        <form th:action="@{/addWishlist}" method="post" th:object="${wishlistDto}">
+            <label>Введите название:
+                <div>
+                    <input type="text" th:name="title" placeholder="Введите название" required>
+                </div>
+            </label>
+            <br>
+            <label>Введите описание:
+                <div>
+                    <textarea th:name="description" placeholder="Введите описание" required></textarea>
+                </div>
+            </label>
+            <br>
+            <input type="submit" value="Создать">
+        </form>
+        <br><br>
+        <a th:href="@{/myWishlists}" class="links exit">
+            Мои вишлисты
+        </a>
+        <br>
+        <br>
+        <br>
+        <a th:href="@{/mainPage}" class="links exit">На главную</a>
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

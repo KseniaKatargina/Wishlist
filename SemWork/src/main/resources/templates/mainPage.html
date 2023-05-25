@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/menu.js" defer></script>
+    <script src="../static/js/product.js" defer></script>
+    <script src="../static/js/categories.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="main">
+    <div class="mainPage">
+
+    <div class="products">
+    <div class="categories">
+        <div></div><h2>Categories</h2></div>
+        <div id="categoryContainer"></div>
+    </div>
+    <div class="productCards">
+        <div th:each="productDto : ${products}" class="productCard">
+            <img class="imgCard" th:src="*{productDto.getImg}" />
+            <p class="imgText" th:text="*{productDto.getText}" />
+            <div class="dropdownLists">
+                <button class="dropListsBtn">
+                    <i class="far fa-heart fa-1x"></i>
+                </button>
+                <div class="dropdown-lists dropLists">
+                    <form th:action="@{/addWishlist}" method="get" >
+                        <input class="wish" type="submit" value="+" />
+                    </form>
+                    <input hidden id="wishlists" th:value=" ${wishlists}">
+                    <div th:each="wishlistDto : ${wishlists}" >
+                        <div id="addProductForm">
+                            <input class="wish" id="addProductButton" type="submit" th:value="${wishlistDto.title}" />
+                            <input type="hidden" id="listID" name="listID" th:value="${wishlistDto.id}" />
+                            <input type="hidden" id="prodID" name="prodID" th:value="${productDto.id}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>

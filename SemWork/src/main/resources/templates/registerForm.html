@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/showPassword.js" defer></script>
+    <script src="../static/js/validate.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="form">
+    <div class="registerForm">
+        <form th:action="@{/register}" method="post" id="registerForm" th:object="${user}">
+            <label for="username">Имя
+                <div>
+                    <input id="username" type="text" name="username" placeholder="имя пользователя" th:field="*{username}" required maxlength="30" minlength="3">
+                    <span id="usernameError" class="error"></span>
+                </div>
+            </label>
+            <br>
+            <label>Email
+                <div>
+                    <input type="text" id="email" name="email" placeholder="email" th:field="*{email}" required>
+                    <span id="emailError" class="error"></span>
+                </div>
+            </label>
+            <br>
+            <label>Пароль
+                <div>
+                    <input  id="password" class="password_input" type="password" name="password" placeholder="пароль" th:field="*{password}" required maxlength="30" minlength="8">
+                    <a href="#" class="showPass" style="color: #1c1b1b">
+                        <i id="i" class="far fa-eye"></i>
+                    </a>
+                    <span id="passwordError" class="error"></span>
+                </div>
+                <br>
+            </label>
+            <br>
+            <label>Повторите пароль
+                <div>
+                    <input id="passwordRepeat" class="re_password_input" type="password" name="rePassword" placeholder="пароль" required>
+                    <a href="#" class="showRePass" style="color: #1c1b1b">
+                        <i id="i2" class="far fa-eye"></i>
+                    </a>
+                    <span id="passwordRepeatError" class="error"></span>
+                </div>
+            </label>
+            <br>
+            <p class="small">Пароль должен содержать заглавные, строчные буквы и цифры, содержать от 8 до 30 символов</p>
+            <label>Дата рождения
+                <div>
+                    <input id="birthday" type="date" name="birthday" min="1922-01-01" max="2010-12-31" th:field="*{birthday}" placeholder="дата рождения" required>
+                    <span id="birthdayError" class="error"></span>
+                </div>
+            </label>
+            <br>
+            <div id="generalError" class="error"></div>
+            <br>
+            <input value="Зарегистрироваться" type="submit" name="Зарегистрироваться">
+        </form>
+        <br>
+        <p>Уже зарегистрированы? <a th:href="@{/login}" class="links"> войти</a></p>
+        <br>
+    </div>
+</div>
+
+<div th:insert="~{footer :: foot}"></div>
+
+</body>
+</html>

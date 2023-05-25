@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Wishlist</title>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <script src="../static/js/menu.js" defer></script>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+<div th:insert="~{header :: head}"></div>
+<div class="form">
+    <div class="loginForm">
+        <br>
+        <br>
+        <br>
+        <form th:action="@{/changeWishlist}" th:method="post">
+            <label>Введите название:
+                <div>
+                    <input type="text" name="title" placeholder="Введите новое название" th:value="${title}">
+                </div>
+            </label>
+            <br>
+            <br>
+            <br>
+            <label>Введите описание:
+                <div>
+                    <input type="text" name="description" placeholder="Введите новое описание" th:value="${description}">
+                </div>
+            </label>
+            <input type="hidden" name="listID" th:value="${listID}">
+            <br>
+            <br>
+            <input value="Изменить wishlist" type="submit" name="Изменить wishlist">
+        </form>
+        <br>
+        <br>
+        <a th:href="@{/myWishlists}" class="remove"><i class="fa fa-reply fa-1x"></i>  К моим листам</a>
+    </div>
+</div>
+<div th:insert="~{footer :: foot}"></div>
+</body>
+</html>
