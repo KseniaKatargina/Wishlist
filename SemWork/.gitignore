@@ -1,7 +1,4 @@
 HELP.md
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -27,7 +24,6 @@ nb-configuration.xml
 .idea/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
