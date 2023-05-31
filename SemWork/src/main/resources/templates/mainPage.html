@@ -35,7 +35,7 @@
                     <input hidden id="wishlists" th:value=" ${wishlists}">
                     <div th:each="wishlistDto : ${wishlists}" >
                         <div id="addProductForm">
-                            <input class="wish" id="addProductButton" type="submit" th:value="${wishlistDto.title}" />
+                            <input class="wish wishL" id="addProductButton" type="submit" th:value="${wishlistDto.title}" />
                             <input type="hidden" id="listID" name="listID" th:value="${wishlistDto.id}" />
                             <input type="hidden" id="prodID" name="prodID" th:value="${productDto.id}" />
                         </div>
