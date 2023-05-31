@@ -1,4 +1,4 @@
-document.querySelectorAll('.wish').forEach(button => {
+document.querySelectorAll('.wishL').forEach(button => {
     button.addEventListener('click', (event) => {
         event.preventDefault();
         const listID = button.parentElement.querySelector('#listID').value;
